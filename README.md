@@ -102,8 +102,10 @@ The database has been seeded with demo users for each system role:
 
 ## 📋 Project Status & Roadmaps
 
-Track real-time progress using:
+Track real-time progress and deployment guides:
+- [🚀 Render Deployment Guide](./DEPLOYMENT.md)
 - [`PHASES_TRACKER.md`](./PHASES_TRACKER.md)
 - [`FEATURES_TRACKER.md`](./FEATURES_TRACKER.md)
 - [`TASK_LIST.md`](./TASK_LIST.md)
+
 
