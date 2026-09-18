@@ -260,6 +260,29 @@ Render provides automatic, free, zero-configuration Let's Encrypt SSL certificat
 
 ---
 
+## ⏰ Keep-Alive Cron Service (Prevent Render Free Tier Sleep)
+
+Render's Free Tier automatically puts web services to sleep after **15 minutes of inactivity**, causing a 50-second delay on the next visit. FitFlow has a built-in automated 10-minute keep-alive system to keep the service warm 24/7:
+
+### 1. Built-In Backend Auto-Ping (Enabled Automatically)
+- **Files:** [`src/instrumentation.ts`](src/instrumentation.ts) and [`src/lib/keep-alive.ts`](src/lib/keep-alive.ts)
+- **How it works:** When the Next.js server starts in production on Render, it automatically schedules an HTTP GET request to `https://<RENDER_EXTERNAL_URL>/api/health` every **10 minutes** (before the 15-minute idle cutoff).
+- **Zero Config:** Automatically detects your public URL via Render's built-in `RENDER_EXTERNAL_URL` or `NEXTAUTH_URL`.
+
+### 2. External GitHub Actions Cron Workflow
+- **File:** [`.github/workflows/keep-alive.yml`](.github/workflows/keep-alive.yml)
+- **How it works:** GitHub runs a completely free background runner on schedule `*/10 * * * *` that curls your Render URL `/api/health` every 10 minutes from outside.
+- **Setup:**
+  1. In your GitHub repository, go to **Settings → Secrets and variables → Actions**.
+  2. Add repository secret `RENDER_SERVICE_URL` with value `https://<your-service-name>.onrender.com`.
+
+### 3. Optional: Free External Monitor (UptimeRobot)
+1. Register at [UptimeRobot.com](https://uptimerobot.com) (Free).
+2. Add New Monitor → Type: **HTTP(s)** → URL: `https://<your-service-name>.onrender.com/api/health` → Interval: **10 minutes**.
+3. This guarantees 100% uptime with instant alerts if your service ever experiences downtime.
+
+---
+
 ## 🛠 Troubleshooting & FAQs
 
 ### Q1: The build fails with `PrismaClientInitializationError` during `next build`
