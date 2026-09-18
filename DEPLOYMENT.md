@@ -126,7 +126,7 @@ You can choose either **Option A** (Standard Web Dashboard) or **Option B** (1-C
 | **Branch** | `main` | Production branch |
 | **Root Directory** | *(leave empty)* | Application is in the root directory |
 | **Runtime** | **`Node`** | Native Node.js environment |
-| **Build Command** | `npm install && npx prisma generate && npm run build` | Installs packages, generates Prisma Client, and builds Next.js |
+| **Build Command** | `npm install --include=dev && npx prisma generate && npm run build` | Installs packages including build tools (Tailwind, PostCSS, Prisma), generates Prisma Client, and builds Next.js |
 | **Start Command** | `npm run start` | Launches the Next.js production server |
 | **Instance Type** | **Starter ($7/mo)** or **Free** | *Starter* is recommended for 24/7 uptime without sleep delays |
 
