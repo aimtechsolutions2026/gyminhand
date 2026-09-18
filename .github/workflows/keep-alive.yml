@@ -16,3 +16,4 @@ jobs:
         run: |
           echo "Pinging $SERVICE_URL/api/health at $(date)"
           curl -f -s -S "$SERVICE_URL/api/health" || echo "Ping completed with warning"
+
